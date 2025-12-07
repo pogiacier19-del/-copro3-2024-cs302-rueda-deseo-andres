@@ -1,4 +1,4 @@
-﻿using MySql.Data.MySqlClient;
+using MySql.Data.MySqlClient;
 using System;
 using System.Data.SqlTypes;
 using System.Text.RegularExpressions;
@@ -16,11 +16,11 @@ namespace BaseBall
             UsernameCon.Open();
             MySqlCommand sqlCMD = new MySqlCommand("SELECT Character_Name FROM CharacterData", UsernameCon);
             MySqlDataReader readusername = sqlCMD.ExecuteReader();
-            
+
 
             while (readusername.Read())
             {
-                if(username.Equals(readusername["Character_Name"]))
+                if (username.Equals(readusername["Character_Name"]))
                 {
                     throw new InvalidUsernameException("Username already taken");
                 }
@@ -56,14 +56,14 @@ namespace BaseBall
 
             var baseStats = new Stats(5, 5, 5, 5);
             var customChar = new CustomizeableCharacter("Player", baseStats);
-            
+
 
             while (true)
             {
                 try
                 {
                     Console.WriteLine("=== CREATE YOUR CHARACTER ===\n");
-                    
+
 
                     Console.Write("Enter Username (Letters only, 4–20 chars): ");
                     string tempName = Console.ReadLine();
@@ -183,6 +183,12 @@ namespace BaseBall
                 baseStats.Speed = 5;
                 baseStats.Stamina = 5;
                 baseStats.Accuracy = 5;
+                Console.WriteLine($"=== Stat points available: {statPoints} ===\n" +
+                    $"Strength default: {baseStats.Strength}\n" +
+                    $"Speed default: {baseStats.Speed}\n" +
+                    $"Stamina default: {baseStats.Stamina}\n" +
+                    $"Accuracy default: {baseStats.Accuracy}\n");
+                MainMenu.WaitForEnter();
 
                 while (statPoints > 0)
                 {
@@ -288,3 +294,4 @@ namespace BaseBall
         }
     }
 }
+
